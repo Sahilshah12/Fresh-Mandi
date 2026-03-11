@@ -27,6 +27,7 @@ export default function ProductDetails() {
   const [reviews, setReviews] = useState([])
   const [showReviewForm, setShowReviewForm] = useState(false)
   const [currentUser, setCurrentUser] = useState(null)
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false)
 
   useEffect(() => {
     fetchProduct()
@@ -104,6 +105,14 @@ export default function ProductDetails() {
    */
   const handleAddToCart = () => {
     if (!product) return
+    
+    // Check if user is logged in
+    const token = localStorage.getItem('token')
+    if (!token || !currentUser) {
+      setShowLoginPrompt(true)
+      return
+    }
+    
     addToCart(product, quantity)
     navigate('/cart')
   }
@@ -155,7 +164,42 @@ export default function ProductDetails() {
   const productURL = `${window.location.origin}/product/${product._id}`
 
   return (
-    <div className="max-w-6xl mx-auto py-8">
+    <div className="max-w-6xl mx-auto py-8 px-4">
+      {/* Login Prompt Modal */}
+      {showLoginPrompt && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full">
+            <div className="text-center">
+              <div className="text-6xl mb-4">🔒</div>
+              <h2 className="text-2xl font-bold mb-3 text-gray-900">Login Required</h2>
+              <p className="text-gray-600 mb-6">
+                Please login or create an account to add products to your cart and place orders.
+              </p>
+              <div className="space-y-3">
+                <button
+                  onClick={() => navigate('/login')}
+                  className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-3 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all shadow-lg"
+                >
+                  Login to Continue
+                </button>
+                <button
+                  onClick={() => navigate('/register')}
+                  className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-all"
+                >
+                  Create New Account
+                </button>
+                <button
+                  onClick={() => setShowLoginPrompt(false)}
+                  className="w-full bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-200 transition-all"
+                >
+                  Continue Browsing
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Breadcrumb Navigation */}
       <nav className="mb-6 text-sm text-gray-600">
         <Link to="/" className="hover:text-green-600">Home</Link>

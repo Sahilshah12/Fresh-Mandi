@@ -7,14 +7,27 @@ exports.register = async (req, res) => {
   try {
     const { name, email, password, role, city, mandi } = req.body;
     if (!name || !email || !password) return res.status(400).json({ message: 'Missing fields' });
+    
+    // SECURITY: Prevent admin registration through public API
+    // Only allow 'consumer' and 'farmer' roles
+    const allowedRoles = ['consumer', 'farmer'];
+    const userRole = role && allowedRoles.includes(role) ? role : 'consumer';
+    
+    // Explicitly block admin role registration
+    if (role === 'admin') {
+      return res.status(403).json({ 
+        message: 'Admin accounts cannot be created through public registration. Contact system administrator.' 
+      });
+    }
+    
     const exists = await User.findOne({ email });
     if (exists) return res.status(400).json({ message: 'Email already registered' });
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(password, salt);
-    const user = await User.create({ name, email, passwordHash, role: role || 'consumer', city, mandi });
+    const user = await User.create({ name, email, passwordHash, role: userRole, city, mandi });
     
     // Notify admins if a farmer registers
-    if (role === 'farmer') {
+    if (userRole === 'farmer') {
       const admins = await User.find({ role: 'admin' }).select('_id');
       const adminIds = admins.map(admin => admin._id);
       if (adminIds.length > 0) {

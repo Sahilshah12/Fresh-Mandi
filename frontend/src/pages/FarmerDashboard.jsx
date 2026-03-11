@@ -401,9 +401,20 @@ export default function FarmerDashboard(){
                     <p className="text-sm text-gray-600 mb-1">
                       📦 Qty: <span className="font-medium">{p.quantity} {p.unit || 'kg'}</span>
                     </p>
-                    <p className="text-sm text-gray-600 mb-3">
+                    <p className="text-sm text-gray-600 mb-1">
                       📍 {p.city}
                     </p>
+                    <p className="text-xs text-gray-500 mb-1">
+                      🕒 Created: {new Date(p.createdAt).toLocaleDateString()}
+                    </p>
+                    {p.updatedAt && p.updatedAt !== p.createdAt && (
+                      <p className="text-xs text-gray-500 mb-3">
+                        🔄 Updated: {new Date(p.updatedAt).toLocaleDateString()}
+                      </p>
+                    )}
+                    {(!p.updatedAt || p.updatedAt === p.createdAt) && (
+                      <div className="mb-3"></div>
+                    )}
 
                     {/* Availability Toggle */}
                     <div className="mb-3">

@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useNotifications } from '../context/NotificationContext'
+import API from '../services/api'
+import toast from 'react-hot-toast'
 
 export default function NotificationBell() {
   const [isOpen, setIsOpen] = useState(false)
@@ -14,6 +16,21 @@ export default function NotificationBell() {
     deleteNotification,
     clearReadNotifications
   } = useNotifications()
+  
+  // Get current user role
+  const [userRole, setUserRole] = useState(null)
+  
+  useEffect(() => {
+    const userData = localStorage.getItem('user')
+    if (userData) {
+      try {
+        const user = JSON.parse(userData)
+        setUserRole(user.role)
+      } catch (e) {
+        console.error('Failed to parse user data')
+      }
+    }
+  }, [])
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -34,6 +51,26 @@ export default function NotificationBell() {
     setIsOpen(false)
   }
 
+  const handleOrderAction = async (orderId, action, notificationId, e) => {
+    e.stopPropagation()
+    e.preventDefault()
+    
+    try {
+      const newStatus = action === 'accept' ? 'confirmed' : 'cancelled'
+      await API.put(`/orders/${orderId}/status`, { status: newStatus })
+      toast.success(`Order ${action === 'accept' ? 'accepted' : 'rejected'}!`)
+      
+      // Mark notification as read
+      markAsRead(notificationId)
+      
+      // Optionally delete or hide the notification
+      deleteNotification(notificationId)
+    } catch (err) {
+      console.error('Order action error:', err)
+      toast.error(`Failed to ${action} order`)
+    }
+  }
+
   const getNotificationIcon = (type) => {
     const icons = {
       order_created: '🛒',
@@ -45,6 +82,21 @@ export default function NotificationBell() {
     }
     return icons[type] || '🔔'
   }
+  
+  // Filter notifications based on user role
+  const roleBasedNotifications = notifications.filter(notification => {
+    if (userRole === 'farmer') {
+      // Farmers see: new orders, order status changes on their products
+      return ['order_created', 'low_stock', 'product_added'].includes(notification.type)
+    } else if (userRole === 'consumer') {
+      // Consumers see: order status updates
+      return ['order_status', 'order_completed'].includes(notification.type)
+    } else if (userRole === 'admin') {
+      // Admins see everything
+      return true
+    }
+    return true
+  })
 
   const getTimeAgo = (date) => {
     const seconds = Math.floor((new Date() - new Date(date)) / 1000)
@@ -103,9 +155,9 @@ export default function NotificationBell() {
                   )}
                   <button
                     onClick={clearReadNotifications}
-                    className="text-xs text-gray-600 hover:text-gray-700"
+                    className="text-xs text-red-500 hover:text-red-600 font-medium"
                   >
-                    Clear read
+                    Clear All
                   </button>
                 </div>
               )}
@@ -114,7 +166,7 @@ export default function NotificationBell() {
 
           {/* Notifications List */}
           <div className="overflow-y-auto flex-1">
-            {notifications.length === 0 ? (
+            {roleBasedNotifications.length === 0 ? (
               <div className="p-8 text-center">
                 <span className="text-6xl mb-4 block">🔔</span>
                 <p className="text-gray-500">No notifications yet</p>
@@ -124,7 +176,7 @@ export default function NotificationBell() {
               </div>
             ) : (
               <div className="divide-y divide-gray-100">
-                {notifications.map((notification) => (
+                {roleBasedNotifications.map((notification) => (
                   <div
                     key={notification._id}
                     className={`p-4 hover:bg-gray-50 transition-colors cursor-pointer ${
@@ -151,6 +203,16 @@ export default function NotificationBell() {
                             <p className="text-sm text-gray-600 line-clamp-2">
                               {notification.message}
                             </p>
+                            {notification.metadata?.orderId && (
+                              <p className="text-xs text-gray-500 mt-1">
+                                Order ID: {notification.metadata.orderId.toString().slice(-8)}
+                              </p>
+                            )}
+                            {notification.metadata?.fromUserId && (
+                              <p className="text-xs text-blue-600 mt-1 hover:underline">
+                                → View Customer Profile
+                              </p>
+                            )}
                             <p className="text-xs text-gray-400 mt-1">
                               {getTimeAgo(notification.createdAt)}
                             </p>
@@ -186,6 +248,24 @@ export default function NotificationBell() {
                             </button>
                           </div>
                         </div>
+                        
+                        {/* Quick Accept/Reject Buttons for New Orders */}
+                        {notification.type === 'order_created' && notification.metadata?.orderId && (
+                          <div className="mt-3 flex gap-2">
+                            <button
+                              onClick={(e) => handleOrderAction(notification.metadata.orderId, 'accept', notification._id, e)}
+                              className="flex-1 bg-green-600 text-white px-3 py-2 rounded-lg text-xs font-semibold hover:bg-green-700 transition-all"
+                            >
+                              ✓ Accept Order
+                            </button>
+                            <button
+                              onClick={(e) => handleOrderAction(notification.metadata.orderId, 'reject', notification._id, e)}
+                              className="flex-1 bg-red-600 text-white px-3 py-2 rounded-lg text-xs font-semibold hover:bg-red-700 transition-all"
+                            >
+                              ✗ Reject Order
+                            </button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -195,15 +275,11 @@ export default function NotificationBell() {
           </div>
 
           {/* Footer */}
-          {notifications.length > 0 && (
+          {roleBasedNotifications.length > 0 && (
             <div className="p-3 border-t border-gray-200 bg-gray-50 text-center">
-              <Link
-                to="/notifications"
-                onClick={() => setIsOpen(false)}
-                className="text-sm text-green-600 hover:text-green-700 font-medium"
-              >
-                View all notifications →
-              </Link>
+              <p className="text-xs text-gray-500">
+                Showing {roleBasedNotifications.length} {userRole} notification{roleBasedNotifications.length !== 1 ? 's' : ''}
+              </p>
             </div>
           )}
         </div>

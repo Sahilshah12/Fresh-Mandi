@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import API from '../services/api'
 import toast from 'react-hot-toast'
 import { useCart } from '../context/CartContext'
@@ -17,7 +17,9 @@ export default function ConsumerDashboard(){
   const [sortOrder, setSortOrder] = useState('desc')
   const [recentSearches, setRecentSearches] = useState([])
   const [showSuggestions, setShowSuggestions] = useState(false)
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false)
   const { addToCart } = useCart()
+  const navigate = useNavigate()
   
   const cities = ['Mumbai', 'Delhi', 'Bangalore', 'Pune', 'Chennai', 'Kolkata', 'Jaipur', 'Ahmedabad', 'Hyderabad', 'Lucknow']
   const categories = ['Vegetables', 'Fruits', 'Grains', 'Dairy', 'Organic', 'Other']
@@ -99,6 +101,16 @@ export default function ConsumerDashboard(){
     setSortBy(newSortBy)
     setSortOrder(newSortOrder)
   }
+  
+  // Handle add to cart with login check
+  const handleAddToCart = (product) => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      setShowLoginPrompt(true)
+      return
+    }
+    addToCart(product)
+  }
 
   // Clear all filters
   const clearAllFilters = () => {
@@ -128,6 +140,41 @@ export default function ConsumerDashboard(){
 
   return (
     <div className="max-w-7xl mx-auto p-6">
+      {/* Login Prompt Modal */}
+      {showLoginPrompt && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full">
+            <div className="text-center">
+              <div className="text-6xl mb-4">🔒</div>
+              <h2 className="text-2xl font-bold mb-3 text-gray-900">Login to Add to Cart</h2>
+              <p className="text-gray-600 mb-6">
+                Please login or create an account to add products to your cart and make purchases.
+              </p>
+              <div className="space-y-3">
+                <button
+                  onClick={() => navigate('/login')}
+                  className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-3 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all shadow-lg"
+                >
+                  Login to Continue
+                </button>
+                <button
+                  onClick={() => navigate('/register')}
+                  className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-all"
+                >
+                  Create New Account
+                </button>
+                <button
+                  onClick={() => setShowLoginPrompt(false)}
+                  className="w-full bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-200 transition-all"
+                >
+                  Continue Browsing
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-4xl font-bold text-gray-900 mb-2">🛒 Browse Fresh Produce</h1>
@@ -407,7 +454,7 @@ export default function ConsumerDashboard(){
                     View Details
                   </Link>
                   <button
-                    onClick={() => addToCart(p)}
+                    onClick={() => handleAddToCart(p)}
                     className="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 text-sm font-medium transition"
                   >
                     Add to Cart

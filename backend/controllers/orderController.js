@@ -4,7 +4,7 @@ const { notifyNewOrder, notifyOrderStatus } = require('../utils/socketNotificati
 
 exports.placeOrder = async (req, res) => {
   try {
-    const { farmerId, products, totalPrice, deliveryMode, deliveryAddress } = req.body;
+    const { farmerId, products, totalPrice, productsTotal, deliveryCharge, deliveryDistance, deliveryMode, deliveryAddress, paymentMethod, paymentStatus } = req.body;
     if (!farmerId || !products || !totalPrice) return res.status(400).json({ message: 'Missing fields' });
     
     const order = await Order.create({ 
@@ -12,12 +12,20 @@ exports.placeOrder = async (req, res) => {
       farmerId, 
       products, 
       totalPrice, 
+      productsTotal: productsTotal || totalPrice,
+      deliveryCharge: deliveryCharge || 0,
+      deliveryDistance: deliveryDistance || 0,
       deliveryMode,
-      deliveryAddress 
+      deliveryAddress,
+      paymentMethod: paymentMethod || 'cod',
+      paymentStatus: paymentStatus || 'pending'
     });
 
-    // Notify farmer about new order
-    await notifyNewOrder(farmerId, order._id, req.user.name, totalPrice);
+    // Populate order for notification
+    await order.populate('products.productId', 'name');
+    
+    // Notify farmer about new order with product details
+    await notifyNewOrder(farmerId, order._id, req.user.name, totalPrice, products, paymentMethod, paymentStatus, req.user._id);
 
     res.status(201).json(order);
   } catch (err) {
@@ -32,11 +40,37 @@ exports.getOrdersForUser = async (req, res) => {
     if (role === 'consumer') filter.consumerId = req.user._id;
     if (role === 'farmer') filter.farmerId = req.user._id;
     const orders = await Order.find(filter)
-      .populate('consumerId', 'name email')
-      .populate('farmerId', 'name mandi')
+      .populate('consumerId', 'name email phone address city state pincode')
+      .populate('farmerId', 'name email phone address city state pincode mandi')
       .populate('products.productId', 'name category')
       .sort({ createdAt: -1 });
     res.json(orders);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.updatePaymentStatus = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    // Only the farmer who owns the order can mark COD payment as received
+    if (order.farmerId.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: 'Not authorized to update this order payment' });
+    }
+
+    if (order.paymentMethod !== 'cod') {
+      return res.status(400).json({ message: 'Payment status can only be updated for Cash on Delivery orders' });
+    }
+
+    order.paymentStatus = 'paid';
+    await order.save();
+
+    res.json({ message: 'Payment marked as received', order });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

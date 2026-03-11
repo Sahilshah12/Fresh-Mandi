@@ -18,9 +18,44 @@ export const NotificationProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([])
   const [unreadCount, setUnreadCount] = useState(0)
   const [connected, setConnected] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-  // Initialize socket connection
+  // Check authentication status
   useEffect(() => {
+    const checkAuth = () => {
+      const token = localStorage.getItem('token')
+      const user = localStorage.getItem('user')
+      setIsAuthenticated(!!(token && user))
+    }
+
+    checkAuth()
+
+    // Listen for storage changes (login/logout from other tabs)
+    window.addEventListener('storage', checkAuth)
+    
+    // Custom event for same-tab login/logout
+    window.addEventListener('auth-change', checkAuth)
+
+    return () => {
+      window.removeEventListener('storage', checkAuth)
+      window.removeEventListener('auth-change', checkAuth)
+    }
+  }, [])
+
+  // Initialize socket connection only when authenticated
+  useEffect(() => {
+    if (!isAuthenticated) {
+      // Clean up if not authenticated
+      if (socket) {
+        socket.close()
+        setSocket(null)
+      }
+      setConnected(false)
+      setNotifications([])
+      setUnreadCount(0)
+      return
+    }
+
     const token = localStorage.getItem('token')
     if (!token) return
 
@@ -41,7 +76,7 @@ export const NotificationProvider = ({ children }) => {
 
     newSocket.on('authentication_error', () => {
       console.error('❌ Socket authentication failed')
-      toast.error('Failed to connect to notification service')
+      setConnected(false)
     })
 
     newSocket.on('disconnect', () => {
@@ -74,10 +109,12 @@ export const NotificationProvider = ({ children }) => {
     return () => {
       newSocket.close()
     }
-  }, [])
+  }, [isAuthenticated])
 
-  // Fetch initial notifications
+  // Fetch initial notifications only when authenticated
   useEffect(() => {
+    if (!isAuthenticated) return
+
     const fetchNotifications = async () => {
       const token = localStorage.getItem('token')
       if (!token) return
@@ -87,12 +124,15 @@ export const NotificationProvider = ({ children }) => {
         setNotifications(res.data.notifications)
         setUnreadCount(res.data.unreadCount)
       } catch (err) {
-        console.error('Failed to fetch notifications:', err)
+        // Only log error if it's not a 401 (unauthorized)
+        if (err.response?.status !== 401) {
+          console.error('Failed to fetch notifications:', err)
+        }
       }
     }
 
     fetchNotifications()
-  }, [])
+  }, [isAuthenticated])
 
   const markAsRead = async (notificationId) => {
     try {

@@ -55,14 +55,22 @@ const createNotification = async (userId, type, title, message, link = null, met
 /**
  * Notify farmer about new order
  */
-const notifyNewOrder = async (farmerId, orderId, consumerName, totalPrice) => {
+const notifyNewOrder = async (farmerId, orderId, consumerName, totalPrice, products, paymentMethod, paymentStatus, consumerId) => {
+  // Create product summary
+  const productSummary = products.map(p => `${p.quantity} units`).join(', ');
+  const productCount = products.length;
+  
+  const paymentInfo = paymentMethod === 'online' && paymentStatus === 'paid' 
+    ? ' (Payment completed ✓)' 
+    : ' (COD)';
+  
   await createNotification(
     farmerId,
     'order_created',
     '🎉 New Order Received!',
-    `${consumerName} placed an order worth ₹${totalPrice.toFixed(2)}`,
+    `${consumerName} bought ${productCount} product${productCount > 1 ? 's' : ''} (${productSummary}) worth ₹${totalPrice.toFixed(2)}${paymentInfo}`,
     '/orders',
-    { orderId }
+    { orderId, fromUserId: consumerId }
   );
 };
 

@@ -49,7 +49,7 @@ io.on('connection', (socket) => {
   // Authenticate socket connection
   socket.on('authenticate', (token) => {
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret');
       socket.userId = decoded.id;
       socket.join(`user_${decoded.id}`);
       console.log(`✅ User ${decoded.id} authenticated and joined room`);

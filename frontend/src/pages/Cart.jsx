@@ -1,9 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 
 export default function Cart() {
   const { cart, updateQuantity, removeFromCart, clearCart, cartTotal } = useCart()
+  const navigate = useNavigate()
 
   if (cart.length === 0) {
     return (
