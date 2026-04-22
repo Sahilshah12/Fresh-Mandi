@@ -25,7 +25,15 @@ const io = new Server(server, {
 // Initialize Socket.io for notifications
 initSocketIO(io);
 
-app.use(cors());
+// Configure CORS for Express
+const corsOptions = {
+  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Serve uploaded files
