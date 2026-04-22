@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Product Image -->
+            <ImageView
+                android:id="@+id/productImage"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:contentDescription="Product Image"
+                android:scaleType="centerCrop"
+                android:background="#F3F4F6"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Product Details Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@drawable/product_card_background"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:id="@+id/productName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Product Name"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#1F2937"
+                    android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="☆ "
+                        android:textSize="18sp"
+                        android:textColor="#F59E0B" />
+
+                    <TextView
+                        android:id="@+id/productRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4.5 (120 reviews)"
+                        android:textSize="14sp"
+                        android:textColor="#6B7280" />
+
+                </LinearLayout>
+
+                <!-- Price Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:id="@+id/productPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="₹99/kg"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="#059669" />
+
+                    <TextView
+                        android:id="@+id/productCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Vegetables"
+                        android:textSize="14sp"
+                        android:textColor="#6B7280"
+                        android:layout_marginStart="16dp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:background="@drawable/edit_text_background" />
+
+                </LinearLayout>
+
+                <!-- Description -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Description"
+                    android:textStyle="bold"
+                    android:textColor="#1F2937"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:id="@+id/productDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fresh organic product directly from the farm"
+                    android:textSize="14sp"
+                    android:textColor="#6B7280"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Available Quantity -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Available"
+                    android:textStyle="bold"
+                    android:textColor="#1F2937"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView
+                    android:id="@+id/availableQuantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="100 kg available"
+                    android:textSize="14sp"
+                    android:textColor="#059669" />
+
+            </LinearLayout>
+
+            <!-- Quantity Selector and Add to Cart -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/edit_text_background"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp">
+
+                    <Button
+                        android:id="@+id/decreaseQuantity"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:text="-"
+                        android:background="#E5E7EB"
+                        android:textColor="#1F2937" />
+
+                    <TextView
+                        android:id="@+id/quantityText"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textAlignment="center"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/increaseQuantity"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:text="+"
+                        android:background="#E5E7EB"
+                        android:textColor="#1F2937" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/addToCartButton"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:text="Add to Cart"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/button_background"
+                    android:layout_marginStart="12dp" />
+
+            </LinearLayout>
+
+            <!-- Reviews Section -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reviews"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#1F2937"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reviewsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Add Review Button -->
+    <Button
+        android:id="@+id/addReviewButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Add a Review"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_background"
+        android:layout_marginTop="12dp" />
+
+</LinearLayout>

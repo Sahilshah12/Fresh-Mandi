@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">FreshMandiApp</string>
+
+    <!-- Cities -->
+    <string-array name="cities">
+        <item>All Cities</item>
+        <item>Mumbai</item>
+        <item>Delhi</item>
+        <item>Bangalore</item>
+        <item>Pune</item>
+        <item>Chennai</item>
+        <item>Kolkata</item>
+        <item>Jaipur</item>
+        <item>Ahmedabad</item>
+        <item>Hyderabad</item>
+        <item>Lucknow</item>
+    </string-array>
+
+    <!-- Categories -->
+    <string-array name="categories">
+        <item>All Categories</item>
+        <item>Vegetables</item>
+        <item>Fruits</item>
+        <item>Grains</item>
+        <item>Dairy</item>
+        <item>Organic</item>
+        <item>Other</item>
+    </string-array>
+
+    <!-- Order Status -->
+    <string-array name="orderStatuses">
+        <item>Pending</item>
+        <item>Confirmed</item>
+        <item>Ready</item>
+        <item>Completed</item>
+        <item>Cancelled</item>
+    </string-array>
+
+</resources>

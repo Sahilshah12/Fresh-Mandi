@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.freshmandi.app.presentation.ui.fragments.HomeFragment"
+        android:label="Home">
+        <action
+            android:id="@+id/action_homeFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.freshmandi.app.presentation.ui.fragments.ProductDetailFragment"
+        android:label="Product Details">
+        <argument
+            android:name="productId"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.freshmandi.app.presentation.ui.fragments.CartFragment"
+        android:label="Cart">
+        <action
+            android:id="@+id/action_cartFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.freshmandi.app.presentation.ui.fragments.CheckoutFragment"
+        android:label="Checkout" />
+
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="com.freshmandi.app.presentation.ui.fragments.OrdersFragment"
+        android:label="Orders">
+        <action
+            android:id="@+id/action_ordersFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:name="com.freshmandi.app.presentation.ui.fragments.OrderDetailFragment"
+        android:label="Order Details">
+        <argument
+            android:name="orderId"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.freshmandi.app.presentation.ui.fragments.ProfileFragment"
+        android:label="Profile" />
+
+</navigation>
