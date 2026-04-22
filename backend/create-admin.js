@@ -29,9 +29,9 @@ const createAdmin = async () => {
 
     // Create admin user
     const adminData = {
-      name: 'Admin User',
-      email: 'admin@freshmandi.com',
-      password: 'admin123',
+      name: 'Admin',
+      email: 'sahil123@gmail.com',
+      password: 'Sahil123',
       role: 'admin',
       city: 'Mumbai'
     };
