@@ -1,0 +1,497 @@
+{
+  "users": [
+    {
+      "_id": "69032822107f54ee118da601",
+      "name": "Sahil Shah",
+      "email": "sahil123@gmail.com",
+      "passwordHash": "$2a$10$aXYammKnlocaDvfoLElJx.3z9b2Ffrm4DKi7/0DNdkh3a84zTQkSy",
+      "role": "admin",
+      "city": "Ballia",
+      "mandi": "",
+      "approved": false,
+      "createdAt": "2025-10-30T08:56:02.772Z",
+      "updatedAt": "2025-10-30T08:56:02.772Z",
+      "__v": 0
+    },
+    {
+      "_id": "69087af89f3690dc51d3b3b6",
+      "name": "Sahil Shah",
+      "email": "sahil8219@gmail.com",
+      "passwordHash": "$2a$10$sgg/iJAWtKb1SfMi.VYUzuxB.4ireiNnIzkorQzWMx7Ht.KixDIDu",
+      "role": "admin",
+      "city": "Lucknow",
+      "mandi": "",
+      "approved": false,
+      "createdAt": "2025-11-03T09:50:48.497Z",
+      "updatedAt": "2025-11-03T09:50:48.497Z",
+      "__v": 0
+    },
+    {
+      "_id": "69088eda1d5c3d874e846014",
+      "name": "Ankit Gupta",
+      "email": "ankit123@gmail.com",
+      "passwordHash": "$2a$10$CEvtUVjxpwivOBL1Gm.93eA89/f4ftFOqm3PZPTLpHe8gDtymig2i",
+      "role": "consumer",
+      "city": "Delhi",
+      "mandi": "",
+      "approved": false,
+      "createdAt": "2025-11-03T11:15:38.371Z",
+      "updatedAt": "2025-11-03T11:15:38.371Z",
+      "__v": 0
+    },
+    {
+      "_id": "690891551d5c3d874e84602e",
+      "name": "Suraj Kumar",
+      "email": "suraj123@gmail.com",
+      "passwordHash": "$2a$10$X4PtfzyDyCJ4gF3Pib/prurTgoRGJwe86GjBF2zm.UPa6W5QDmxhW",
+      "role": "farmer",
+      "city": "Lucknow",
+      "mandi": "charbagh",
+      "approved": true,
+      "createdAt": "2025-11-03T11:26:13.607Z",
+      "updatedAt": "2025-11-03T11:28:59.914Z",
+      "__v": 0
+    },
+    {
+      "_id": "6912ed696b607e7e2acd0435",
+      "name": "ram",
+      "email": "ram7@gmai.com",
+      "passwordHash": "$2a$10$9a9vIO0JGV603cl4jug1U.Sq.kjdz4cxCJUCJNgka8TOFPJjwvR3K",
+      "role": "farmer",
+      "city": "Mumbai",
+      "mandi": "Navi mumbai",
+      "approved": true,
+      "createdAt": "2025-11-11T08:01:45.889Z",
+      "updatedAt": "2025-11-11T08:05:25.868Z",
+      "__v": 0
+    },
+    {
+      "_id": "6995694deb3979956a7bbc89",
+      "name": "Meraj Ahmad",
+      "email": "miraj123@gmail.com",
+      "passwordHash": "$2a$10$AG8q9PLewyeFMq9Zx.raIOqNtxwPWxLlF08quqFpzKE7fKxLsoMKS",
+      "role": "consumer",
+      "city": "Lucknow",
+      "mandi": "",
+      "approved": false,
+      "createdAt": "2026-02-18T07:25:01.445Z",
+      "updatedAt": "2026-02-18T07:25:01.445Z",
+      "__v": 0
+    }
+  ],
+  "products": [
+    {
+      "unit": "kg",
+      "averageRating": 0,
+      "reviewCount": 0,
+      "_id": "690891d51d5c3d874e84603a",
+      "farmerId": "690891551d5c3d874e84602e",
+      "name": "Potato",
+      "category": "Vegetables",
+      "price": 17,
+      "quantity": 100,
+      "imageURL": "/uploads/1762169301312-download.jpg",
+      "city": "Lucknow",
+      "available": true,
+      "createdAt": "2025-11-03T11:28:21.323Z",
+      "updatedAt": "2026-03-10T12:20:58.830Z",
+      "__v": 0
+    },
+    {
+      "unit": "kg",
+      "averageRating": 0,
+      "reviewCount": 0,
+      "_id": "6908b8edc2dc9e6ecf37022b",
+      "farmerId": "690891551d5c3d874e84602e",
+      "name": "Mango",
+      "category": "Fruits",
+      "price": 40,
+      "quantity": 300,
+      "imageURL": "/uploads/1762179309120-mango.jpg",
+      "city": "Delhi",
+      "available": true,
+      "createdAt": "2025-11-03T14:15:09.130Z",
+      "updatedAt": "2026-03-10T12:20:36.848Z",
+      "__v": 0
+    },
+    {
+      "_id": "6912edcc6b607e7e2acd0446",
+      "farmerId": "6912ed696b607e7e2acd0435",
+      "name": "Carrot",
+      "category": "Vegetables",
+      "price": 37,
+      "quantity": 27,
+      "unit": "kg",
+      "imageURL": "/uploads/1762848204743-carrot.jpeg",
+      "city": "Mumbai",
+      "available": true,
+      "averageRating": 0,
+      "reviewCount": 0,
+      "createdAt": "2025-11-11T08:03:24.750Z",
+      "updatedAt": "2025-11-11T08:03:42.546Z",
+      "__v": 0
+    }
+  ],
+  "orders": [
+    {
+      "_id": "6908b916c2dc9e6ecf370240",
+      "consumerId": "690891551d5c3d874e84602e",
+      "farmerId": "690891551d5c3d874e84602e",
+      "products": [
+        {
+          "productId": "6908b8edc2dc9e6ecf37022b",
+          "price": 40,
+          "quantity": 8,
+          "_id": "6908b916c2dc9e6ecf370241"
+        }
+      ],
+      "totalPrice": 320,
+      "deliveryMode": "delivery",
+      "deliveryAddress": "New Delhi",
+      "status": "completed",
+      "createdAt": "2025-11-03T14:15:50.372Z",
+      "updatedAt": "2026-03-10T13:02:03.039Z",
+      "__v": 0,
+      "paymentMethod": "cod",
+      "paymentStatus": "paid",
+      "deliveryCharge": 0,
+      "deliveryDistance": 0,
+      "productsTotal": 0
+    },
+    {
+      "_id": "6908f3efc59a147af1329f6b",
+      "consumerId": "69088eda1d5c3d874e846014",
+      "farmerId": "690891551d5c3d874e84602e",
+      "products": [
+        {
+          "productId": "690891d51d5c3d874e84603a",
+          "price": 20,
+          "quantity": 2,
+          "_id": "6908f3efc59a147af1329f6c"
+        }
+      ],
+      "totalPrice": 40,
+      "deliveryMode": "pickup",
+      "status": "completed",
+      "createdAt": "2025-11-03T18:26:55.262Z",
+      "updatedAt": "2026-03-10T13:02:06.031Z",
+      "__v": 0,
+      "paymentMethod": "cod",
+      "paymentStatus": "paid",
+      "deliveryCharge": 0,
+      "deliveryDistance": 0,
+      "productsTotal": 0
+    },
+    {
+      "_id": "690c4a1de1b6c73f297fee89",
+      "consumerId": "69088eda1d5c3d874e846014",
+      "farmerId": "690891551d5c3d874e84602e",
+      "products": [
+        {
+          "productId": "690891d51d5c3d874e84603a",
+          "price": 20,
+          "quantity": 1,
+          "_id": "690c4a1de1b6c73f297fee8a"
+        }
+      ],
+      "totalPrice": 20,
+      "deliveryMode": "delivery",
+      "deliveryAddress": "sasram",
+      "status": "completed",
+      "createdAt": "2025-11-06T07:11:25.293Z",
+      "updatedAt": "2026-03-10T13:01:56.653Z",
+      "__v": 0,
+      "deliveryCharge": 0,
+      "deliveryDistance": 0,
+      "paymentMethod": "cod",
+      "paymentStatus": "paid",
+      "productsTotal": 0
+    },
+    {
+      "productsTotal": 0,
+      "deliveryCharge": 0,
+      "deliveryDistance": 0,
+      "paymentMethod": "cod",
+      "paymentStatus": "pending",
+      "_id": "6912e8b96b607e7e2acd0376",
+      "consumerId": "69088eda1d5c3d874e846014",
+      "farmerId": "690891551d5c3d874e84602e",
+      "products": [
+        {
+          "productId": "690891d51d5c3d874e84603a",
+          "price": 20,
+          "quantity": 4,
+          "_id": "6912e8b96b607e7e2acd0377"
+        }
+      ],
+      "totalPrice": 80,
+      "deliveryMode": "delivery",
+      "deliveryAddress": "jalandhar",
+      "status": "cancelled",
+      "createdAt": "2025-11-11T07:41:45.725Z",
+      "updatedAt": "2025-11-11T07:57:20.006Z",
+      "__v": 0
+    },
+    {
+      "_id": "6912ef086b607e7e2acd04bb",
+      "consumerId": "69088eda1d5c3d874e846014",
+      "farmerId": "690891551d5c3d874e84602e",
+      "products": [
+        {
+          "productId": "690891d51d5c3d874e84603a",
+          "price": 20,
+          "quantity": 3,
+          "_id": "6912ef086b607e7e2acd04bc"
+        }
+      ],
+      "totalPrice": 60,
+      "deliveryMode": "pickup",
+      "status": "completed",
+      "createdAt": "2025-11-11T08:08:40.151Z",
+      "updatedAt": "2026-03-10T13:01:48.897Z",
+      "__v": 0,
+      "paymentMethod": "cod",
+      "paymentStatus": "paid",
+      "deliveryCharge": 0,
+      "deliveryDistance": 0,
+      "productsTotal": 0
+    },
+    {
+      "productsTotal": 0,
+      "deliveryCharge": 0,
+      "deliveryDistance": 0,
+      "paymentMethod": "cod",
+      "paymentStatus": "pending",
+      "_id": "6919b740341fca788e049f88",
+      "consumerId": "69088eda1d5c3d874e846014",
+      "farmerId": "6912ed696b607e7e2acd0435",
+      "products": [
+        {
+          "productId": "6912edcc6b607e7e2acd0446",
+          "price": 37,
+          "quantity": 1,
+          "_id": "6919b740341fca788e049f89"
+        }
+      ],
+      "totalPrice": 37,
+      "deliveryMode": "pickup",
+      "status": "pending",
+      "createdAt": "2025-11-16T11:36:32.252Z",
+      "updatedAt": "2025-11-16T11:36:32.252Z",
+      "__v": 0
+    },
+    {
+      "productsTotal": 0,
+      "deliveryCharge": 0,
+      "deliveryDistance": 0,
+      "_id": "69b00f629174dc646ef3d89a",
+      "consumerId": "69088eda1d5c3d874e846014",
+      "farmerId": "690891551d5c3d874e84602e",
+      "products": [
+        {
+          "productId": "6908b8edc2dc9e6ecf37022b",
+          "price": 40,
+          "quantity": 12,
+          "_id": "69b00f629174dc646ef3d89b"
+        }
+      ],
+      "totalPrice": 480,
+      "deliveryMode": "delivery",
+      "deliveryAddress": "Air Port Road New Delhi",
+      "paymentMethod": "online",
+      "paymentStatus": "paid",
+      "status": "completed",
+      "createdAt": "2026-03-10T12:32:34.627Z",
+      "updatedAt": "2026-03-10T12:33:40.451Z",
+      "__v": 0
+    },
+    {
+      "_id": "69b011589174dc646ef3d963",
+      "consumerId": "69088eda1d5c3d874e846014",
+      "farmerId": "690891551d5c3d874e84602e",
+      "products": [
+        {
+          "productId": "690891d51d5c3d874e84603a",
+          "price": 17,
+          "quantity": 5,
+          "_id": "69b011589174dc646ef3d964"
+        }
+      ],
+      "totalPrice": 130,
+      "deliveryMode": "delivery",
+      "deliveryAddress": "Lucknow Charbagh",
+      "paymentMethod": "cod",
+      "paymentStatus": "paid",
+      "status": "completed",
+      "createdAt": "2026-03-10T12:40:56.449Z",
+      "updatedAt": "2026-03-10T13:22:58.755Z",
+      "__v": 0,
+      "deliveryCharge": 0,
+      "deliveryDistance": 0,
+      "productsTotal": 0
+    },
+    {
+      "_id": "69b01b052f2c778bc27a226c",
+      "consumerId": "69088eda1d5c3d874e846014",
+      "farmerId": "6912ed696b607e7e2acd0435",
+      "products": [
+        {
+          "productId": "6912edcc6b607e7e2acd0446",
+          "price": 37,
+          "quantity": 6,
+          "_id": "69b01b052f2c778bc27a226d"
+        }
+      ],
+      "totalPrice": 222,
+      "productsTotal": 222,
+      "deliveryCharge": 0,
+      "deliveryDistance": 0,
+      "deliveryMode": "pickup",
+      "paymentMethod": "online",
+      "paymentStatus": "paid",
+      "status": "pending",
+      "createdAt": "2026-03-10T13:22:13.341Z",
+      "updatedAt": "2026-03-10T13:22:13.341Z",
+      "__v": 0
+    },
+    {
+      "_id": "69b1106ae70fe9e136992483",
+      "consumerId": "69088eda1d5c3d874e846014",
+      "farmerId": "6912ed696b607e7e2acd0435",
+      "products": [
+        {
+          "productId": "6912edcc6b607e7e2acd0446",
+          "price": 37,
+          "quantity": 1,
+          "_id": "69b1106ae70fe9e136992484"
+        }
+      ],
+      "totalPrice": 53.5,
+      "productsTotal": 37,
+      "deliveryCharge": 16.5,
+      "deliveryDistance": 11,
+      "deliveryMode": "delivery",
+      "deliveryAddress": "phagwara",
+      "paymentMethod": "online",
+      "paymentStatus": "paid",
+      "status": "pending",
+      "createdAt": "2026-03-11T06:49:14.585Z",
+      "updatedAt": "2026-03-11T06:49:14.585Z",
+      "__v": 0
+    },
+    {
+      "_id": "69b1106ae70fe9e136992486",
+      "consumerId": "69088eda1d5c3d874e846014",
+      "farmerId": "690891551d5c3d874e84602e",
+      "products": [
+        {
+          "productId": "6908b8edc2dc9e6ecf37022b",
+          "price": 40,
+          "quantity": 1,
+          "_id": "69b1106ae70fe9e136992487"
+        }
+      ],
+      "totalPrice": 56.5,
+      "productsTotal": 40,
+      "deliveryCharge": 16.5,
+      "deliveryDistance": 11,
+      "deliveryMode": "delivery",
+      "deliveryAddress": "phagwara",
+      "paymentMethod": "online",
+      "paymentStatus": "paid",
+      "status": "cancelled",
+      "createdAt": "2026-03-11T06:49:14.590Z",
+      "updatedAt": "2026-03-11T07:21:34.242Z",
+      "__v": 0
+    },
+    {
+      "_id": "69b1174ae70fe9e1369927c7",
+      "consumerId": "69088eda1d5c3d874e846014",
+      "farmerId": "690891551d5c3d874e84602e",
+      "products": [
+        {
+          "productId": "690891d51d5c3d874e84603a",
+          "price": 17,
+          "quantity": 3,
+          "_id": "69b1174ae70fe9e1369927c8"
+        }
+      ],
+      "totalPrice": 51,
+      "productsTotal": 51,
+      "deliveryCharge": 0,
+      "deliveryDistance": 0,
+      "deliveryMode": "pickup",
+      "paymentMethod": "online",
+      "paymentStatus": "paid",
+      "status": "completed",
+      "createdAt": "2026-03-11T07:18:34.994Z",
+      "updatedAt": "2026-03-11T07:21:26.496Z",
+      "__v": 0
+    }
+  ],
+  "reviews": [],
+  "notifications": [
+    {
+      "metadata": {
+        "fromUserId": "6912ed696b607e7e2acd0435"
+      },
+      "_id": "6912ed696b607e7e2acd0438",
+      "userId": "69032822107f54ee118da601",
+      "type": "farmer_registered",
+      "title": "👨‍🌾 New Farmer Registration",
+      "message": "ram registered and needs approval",
+      "link": "/admin",
+      "read": false,
+      "createdAt": "2025-11-11T08:01:45.893Z",
+      "updatedAt": "2025-11-11T08:01:45.893Z",
+      "__v": 0
+    },
+    {
+      "metadata": {
+        "orderId": "6919b740341fca788e049f88"
+      },
+      "_id": "6919b740341fca788e049f8b",
+      "userId": "6912ed696b607e7e2acd0435",
+      "type": "order_created",
+      "title": "🎉 New Order Received!",
+      "message": "Ankit Gupta placed an order worth ₹37.00",
+      "link": "/orders",
+      "read": false,
+      "createdAt": "2025-11-16T11:36:32.272Z",
+      "updatedAt": "2025-11-16T11:36:32.272Z",
+      "__v": 0
+    },
+    {
+      "metadata": {
+        "orderId": "69b01b052f2c778bc27a226c",
+        "fromUserId": "69088eda1d5c3d874e846014"
+      },
+      "_id": "69b01b052f2c778bc27a2270",
+      "userId": "6912ed696b607e7e2acd0435",
+      "type": "order_created",
+      "title": "🎉 New Order Received!",
+      "message": "Ankit Gupta bought 1 product (6 units) worth ₹222.00 (Payment completed ✓)",
+      "link": "/orders",
+      "read": false,
+      "createdAt": "2026-03-10T13:22:13.359Z",
+      "updatedAt": "2026-03-10T13:22:13.359Z",
+      "__v": 0
+    },
+    {
+      "metadata": {
+        "orderId": "69b1106ae70fe9e136992483",
+        "fromUserId": "69088eda1d5c3d874e846014"
+      },
+      "_id": "69b1106ae70fe9e13699248b",
+      "userId": "6912ed696b607e7e2acd0435",
+      "type": "order_created",
+      "title": "🎉 New Order Received!",
+      "message": "Ankit Gupta bought 1 product (1 units) worth ₹53.50 (Payment completed ✓)",
+      "link": "/orders",
+      "read": false,
+      "createdAt": "2026-03-11T06:49:14.599Z",
+      "updatedAt": "2026-03-11T06:49:14.599Z",
+      "__v": 0
+    }
+  ]
+}
