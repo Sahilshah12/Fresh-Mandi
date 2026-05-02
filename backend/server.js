@@ -25,7 +25,7 @@ const corsOrigin = (origin, callback) => {
     return callback(null, true);
   }
 
-  return callback(new Error(`CORS blocked for origin: ${origin}`));
+  return callback(null, false);
 };
 
 // Socket.io setup with CORS
@@ -49,6 +49,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.json());
 
 // Serve uploaded files
