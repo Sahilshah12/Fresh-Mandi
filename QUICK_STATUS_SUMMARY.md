@@ -198,7 +198,7 @@ localhost:5000
 
 ### Database (MongoDB Atlas)
 ```
-cluster0.r0gvxra.mongodb.net/freshmandi
+cluster0.hho5vkh.mongodb.net
 ├─ Collections: users, products, orders, reviews, notifications
 ├─ Records: 25 (backed up locally)
 └─ Status: ⚠️ BLOCKED (IP whitelist)

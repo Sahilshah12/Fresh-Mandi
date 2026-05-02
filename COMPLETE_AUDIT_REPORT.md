@@ -117,7 +117,7 @@ API Layer (Node.js Backend)
 
 Database Layer (MongoDB Atlas)
 ├─ Status: ⚠️ BLOCKED (IP whitelist)
-├─ Cluster: cluster0.r0gvxra.mongodb.net
+├─ Cluster: cluster0.hho5vkh.mongodb.net
 ├─ Database: freshmandi
 ├─ Collections: 5
 └─ Records: 25 (backed up locally)

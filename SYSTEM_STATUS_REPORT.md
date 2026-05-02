@@ -19,7 +19,7 @@
 
 ### Database Status: ⚠️ CONNECTION ISSUE
 - **Database:** MongoDB Atlas (Cloud)
-- **Cluster:** cluster0.r0gvxra.mongodb.net
+- **Cluster:** cluster0.hho5vkh.mongodb.net
 - **Issue:** IP Address not whitelisted
 - **Your IP:** 192.168.1.26
 - **Local Backup:** ✅ Available (backup.json)
@@ -104,7 +104,7 @@ node check-users.js
                       ↓
 ┌─────────────────────────────────────────────────────────────┐
 │         MongoDB Atlas Cloud Database                        │
-│      cluster0.r0gvxra.mongodb.net                          │
+│      cluster0.hho5vkh.mongodb.net                          │
 │         Database: freshmandi                               │
 │        ⚠️ NOT ACCESSIBLE FROM 192.168.1.26                 │
 └─────────────────────────────────────────────────────────────┘
@@ -154,7 +154,7 @@ All endpoints are defined and ready once MongoDB connection is established:
 
 ```
 PORT=5000
-MONGO_URI=mongodb+srv://SahilShah8219:Sahil123@cluster0.r0gvxra.mongodb.net/freshmandi?retryWrites=true&w=majority
+MONGO_URI=mongodb+srv://sahilshah8219_db_user:Sahil123@cluster0.hho5vkh.mongodb.net/?appName=Cluster0
 JWT_SECRET=24bbd6f7ea749c22d638a9755975adb93a7021f41f761b9278ee7b5e8d493c1f
 CLIENT_URL=https://tourmaline-sunshine-87f232.netlify.app
 NODE_ENV=production

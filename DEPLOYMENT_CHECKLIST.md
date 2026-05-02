@@ -12,7 +12,7 @@ Use these exact values to make the live site connect correctly.
 
 Set these environment variables in the Render service:
 
-- `MONGO_URI=mongodb+srv://SahilShah8219:Sahil123@cluster0.r0gvxra.mongodb.net/freshmandi?retryWrites=true&w=majority`
+- `MONGO_URI=mongodb+srv://sahilshah8219_db_user:Sahil123@cluster0.hho5vkh.mongodb.net/?appName=Cluster0`
 - `JWT_SECRET=24bbd6f7ea749c22d638a9755975adb93a7021f41f761b9278ee7b5e8d493c1f`
 - `CLIENT_URL=https://tourmaline-sunshine-87f232.netlify.app`
 - `NODE_ENV=production`
