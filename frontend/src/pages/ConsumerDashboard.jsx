@@ -4,6 +4,7 @@ import API from '../services/api'
 import toast from 'react-hot-toast'
 import { useCart } from '../context/CartContext'
 import StarRating from '../components/StarRating'
+import { getBackendUrl } from '../utils/backendUrl'
 
 export default function ConsumerDashboard(){
   const [products, setProducts] = useState([])
@@ -414,7 +415,7 @@ export default function ConsumerDashboard(){
             <div key={p._id} className="border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-shadow bg-white">
               {p.imageURL ? (
                 <img 
-                  src={`http://localhost:5000${p.imageURL}`} 
+                  src={getBackendUrl(p.imageURL)} 
                   alt={p.name} 
                   className="w-full h-48 object-cover"
                 />

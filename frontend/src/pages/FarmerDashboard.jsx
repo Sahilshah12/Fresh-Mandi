@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import API from '../services/api'
 import toast from 'react-hot-toast'
 import { confirmDelete } from '../components/ConfirmDialog'
+import { getBackendUrl } from '../utils/backendUrl'
 
 export default function FarmerDashboard(){
   const [name, setName] = useState('')
@@ -356,7 +357,7 @@ export default function FarmerDashboard(){
               {/* Product Image */}
               {p.imageURL ? (
                 <img 
-                  src={`http://localhost:5000${p.imageURL}`} 
+                  src={getBackendUrl(p.imageURL)} 
                   alt={p.name} 
                   className="w-full h-48 object-cover"
                 />

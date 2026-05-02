@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
+import { getBackendUrl } from '../utils/backendUrl'
 
 export default function Cart() {
   const { cart, updateQuantity, removeFromCart, clearCart, cartTotal } = useCart()
@@ -33,7 +34,7 @@ export default function Cart() {
             <div key={item._id} className="flex gap-4 border-b pb-4">
               {item.imageURL && (
                 <img 
-                  src={`http://localhost:5000${item.imageURL}`} 
+                  src={getBackendUrl(item.imageURL)} 
                   alt={item.name} 
                   className="w-24 h-24 object-cover rounded"
                 />

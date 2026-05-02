@@ -16,6 +16,7 @@ import {
   BarChart, Bar, LineChart, Line, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer 
 } from 'recharts'
+import { getBackendUrl } from '../utils/backendUrl'
 
 // Color palette for charts
 const COLORS = ['#10B981', '#3B82F6', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899']
@@ -439,7 +440,7 @@ export default function AdminDashboard() {
                     <div key={product._id} className="border rounded-lg p-4">
                       {product.imageURL && (
                         <img 
-                          src={`http://localhost:5000${product.imageURL}`} 
+                          src={getBackendUrl(product.imageURL)} 
                           alt={product.name}
                           className="w-full h-32 object-cover rounded mb-3"
                         />
