@@ -17,11 +17,10 @@
 - **Socket.io:** Ready for real-time notifications
 - **Status:** Server operational but cannot connect to MongoDB Atlas
 
-### Database Status: ⚠️ CONNECTION ISSUE
-- **Database:** MongoDB Atlas (Cloud)
-- **Cluster:** cluster0.hho5vkh.mongodb.net
-- **Issue:** IP Address not whitelisted
-- **Your IP:** 192.168.1.26
+### Database Status: ✅ LOCAL CONNECTION TARGET
+- **Database:** MongoDB local server
+- **Compass:** Connects to `mongodb://127.0.0.1:27017`
+- **Issue:** Local MongoDB service must be running
 - **Local Backup:** ✅ Available (backup.json)
 
 ---
@@ -42,34 +41,23 @@
 
 ---
 
-## 🔴 CRITICAL ISSUE: MongoDB Atlas IP Whitelist
+## 🔴 CRITICAL ISSUE: Local MongoDB Service
 
 ### Problem
-Your local machine IP (192.168.1.26) is not on the MongoDB Atlas cluster's IP whitelist, preventing connections.
+Your app is configured to use local MongoDB, so the MongoDB service must be running on your machine.
 
-### Solution - Add Your IP to MongoDB Atlas Whitelist
+### Solution - Start MongoDB Locally and Connect Compass
 
-**Step 1:** Go to MongoDB Atlas Dashboard
-- URL: https://www.mongodb.com/cloud/atlas
+**Step 1:** Start MongoDB on your PC
+- Make sure `mongod` or MongoDB Community service is running
 
-**Step 2:** Navigate to Network Access
-- Click "Network Access" in the left sidebar
-- Or use direct link: https://cloud.mongodb.com/v2/CLUSTER_ID#security/networkAccess
+**Step 2:** Open MongoDB Compass
+- Create a new connection with `mongodb://127.0.0.1:27017`
 
-**Step 3:** Add Your Current IP
-- Click "+ ADD IP ADDRESS" button
-- Enter: `192.168.1.26`
-- Or select "Add Current IP Address" button
-- Add description: "Development Machine - Sahil"
+**Step 3:** Verify the database
+- Use database name `freshmandi`
 
-**Step 4:** Whitelist 0.0.0.0/0 (Optional - NOT RECOMMENDED for production)
-- Allows access from ANY IP (risky but easier for development)
-- Only use during development with strong credentials
-
-**Step 5:** Click "Confirm"
-- Wait for changes to propagate (may take 1-2 minutes)
-
-**Step 6:** Test Connection
+**Step 4:** Test Connection
 ```bash
 cd c:\Capstone\freshmandi\backend
 node check-users.js
@@ -100,13 +88,13 @@ node check-users.js
 │      - Notifications (Socket.io)                            │
 └─────────────────────┬───────────────────────────────────────┘
                       │
-                      │ ⚠️ BLOCKED (IP Not Whitelisted)
+                      │ connects to
                       ↓
 ┌─────────────────────────────────────────────────────────────┐
-│         MongoDB Atlas Cloud Database                        │
-│      cluster0.hho5vkh.mongodb.net                          │
-│         Database: freshmandi                               │
-│        ⚠️ NOT ACCESSIBLE FROM 192.168.1.26                 │
+│            MongoDB Local Server                             │
+│          mongodb://127.0.0.1:27017                         │
+│                 Database: freshmandi                        │
+│             ✅ Accessible via Compass                       │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -229,7 +217,7 @@ NODE_ENV=production
 
 - Frontend: https://tourmaline-sunshine-87f232.netlify.app
 - Backend: http://localhost:5000
-- MongoDB Atlas: https://www.mongodb.com/cloud/atlas
+- MongoDB Compass: connect to `mongodb://127.0.0.1:27017`
 - GitHub: [Check repository status]
 - API Documentation: See endpoint list above
 
@@ -250,7 +238,7 @@ NODE_ENV=production
 - [x] Backend server running
 - [x] Local database backup created
 - [x] All dependencies installed
-- [ ] MongoDB Atlas connection established
+- [ ] MongoDB local service running
 - [ ] All API endpoints tested
 - [ ] User authentication verified
 - [ ] Payment system active
