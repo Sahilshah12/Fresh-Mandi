@@ -55,8 +55,6 @@ app.use(express.json());
 // Serve uploaded files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-connectDB();
-
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/farmers', require('./routes/farmers'));
@@ -90,7 +88,18 @@ io.on('connection', (socket) => {
 });
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📡 Socket.io ready for real-time notifications`);
-});
+
+const startServer = async () => {
+  try {
+    await connectDB();
+    server.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`📡 Socket.io ready for real-time notifications`);
+    });
+  } catch (err) {
+    console.error('❌ Server startup failed because the database is unavailable.');
+    process.exit(1);
+  }
+};
+
+startServer();
