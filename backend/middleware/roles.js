@@ -1,3 +1,6 @@
+/* ─────────────────────────────────────────────
+   PUBLIC ROUTES — no token needed
+───────────────────────────────────────────── */
 module.exports = (roles = []) => {
   if (typeof roles === 'string') roles = [roles];
   return (req, res, next) => {
