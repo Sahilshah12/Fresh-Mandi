@@ -53,6 +53,7 @@ exports.createReview = async (req, res) => {
     if (existingReview) {
       return res.status(400).json({ message: 'You have already reviewed this product' });
     }
+
     
     // Verify if user purchased this product
     const hasPurchased = await Order.findOne({
@@ -74,6 +75,7 @@ exports.createReview = async (req, res) => {
       photos: photos || [],
       verified: true
     });
+
     
     // Update product rating
     await updateProductRating(productId);
