@@ -11,6 +11,7 @@ const uploadProductImage = async (file) => {
       resource_type: 'image'
     });
 
+    
     // Cleanup local temp file after successful cloud upload.
     fs.promises.unlink(file.path).catch(() => {});
     return uploaded.secure_url;
