@@ -19,6 +19,7 @@ exports.register = async (req, res) => {
         message: 'Admin accounts cannot be created through public registration. Contact system administrator.' 
       });
     }
+
     
     const exists = await User.findOne({ email });
     if (exists) return res.status(400).json({ message: 'Email already registered' });
