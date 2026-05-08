@@ -21,12 +21,15 @@ exports.placeOrder = async (req, res) => {
       paymentStatus: paymentStatus || 'pending'
     });
 
+    
     // Populate order for notification
     await order.populate('products.productId', 'name');
+
     
     // Notify farmer about new order with product details
     await notifyNewOrder(farmerId, order._id, req.user.name, totalPrice, products, paymentMethod, paymentStatus, req.user._id);
 
+    
     res.status(201).json(order);
   } catch (err) {
     res.status(500).json({ message: err.message });
