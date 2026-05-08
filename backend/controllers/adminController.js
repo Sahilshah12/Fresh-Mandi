@@ -11,6 +11,7 @@ exports.listUsers = async (req, res) => {
   }
 };
 
+
 exports.approveOrBlock = async (req, res) => {
   try {
     const { id } = req.params;
@@ -22,6 +23,7 @@ exports.approveOrBlock = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
 
 exports.approveFarmer = async (req, res) => {
   try {
