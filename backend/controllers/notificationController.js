@@ -79,6 +79,8 @@ exports.deleteNotification = async (req, res) => {
   }
 };
 
+
+
 /**
  * Delete all read notifications
  */
