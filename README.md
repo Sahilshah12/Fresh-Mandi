@@ -20,9 +20,10 @@ A full-stack web application connecting local farmers with consumers in a city-b
 - JWT (authentication)
 - bcrypt.js (password hashing)
 - Multer (file uploads)
+- cloudinary (file save)
 
 **Database:**
-- MongoDB (local or Atlas)
+- MongoDB (Atlas)
 
 ---
 
