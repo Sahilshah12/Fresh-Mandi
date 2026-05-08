@@ -1,3 +1,9 @@
+/* ─────────────────────────────────────────────
+   POST /api/auth/login
+   Returns: accessToken (15m) + refreshToken (7d)
+───────────────────────────────────────────── */
+
+
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
