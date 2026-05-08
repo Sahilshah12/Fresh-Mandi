@@ -144,7 +144,7 @@ export default function Register() {
               >
                 <div className="text-4xl mb-3">🛒</div>
                 <div className="font-bold text-lg">Consumer</div>
-                <div className="text-xs text-gray-600 mt-1">Buy fresh produce</div>
+                <div className="text-xs text-gray-600 mt-1">Buy fresh products</div>
               </button>
               
               <button
@@ -158,7 +158,7 @@ export default function Register() {
               >
                 <div className="text-4xl mb-3">🚜</div>
                 <div className="font-bold text-lg">Farmer</div>
-                <div className="text-xs text-gray-600 mt-1">Sell your produce</div>
+                <div className="text-xs text-gray-600 mt-1">Sell your products</div>
               </button>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
-import { getBackendUrl } from '../utils/backendUrl'
+import { getProductImageUrl } from '../utils/backendUrl'
 
 export default function Cart() {
   const { cart, updateQuantity, removeFromCart, clearCart, cartTotal } = useCart()
@@ -30,49 +30,53 @@ export default function Cart() {
         </div>
 
         <div className="space-y-4">
-          {cart.map(item => (
-            <div key={item._id} className="flex gap-4 border-b pb-4">
-              {item.imageURL && (
-                <img 
-                  src={getBackendUrl(item.imageURL)} 
-                  alt={item.name} 
-                  className="w-24 h-24 object-cover rounded"
-                />
-              )}
-              <div className="flex-1">
-                <h3 className="font-bold text-lg">{item.name}</h3>
-                <p className="text-sm text-gray-600">{item.category}</p>
-                <p className="text-green-600 font-bold">₹{item.price} each</p>
-                {item.farmerId && (
-                  <p className="text-xs text-gray-500 mt-1">From: {item.farmerId.name}</p>
+          {cart.map((item) => {
+            const imageUrl = getProductImageUrl(item)
+
+            return (
+              <div key={item._id} className="flex gap-4 border-b pb-4">
+                {imageUrl && (
+                  <img
+                    src={imageUrl}
+                    alt={item.name}
+                    className="w-24 h-24 object-cover rounded"
+                  />
                 )}
-              </div>
-              <div className="flex flex-col items-end gap-2">
-                <div className="flex items-center gap-2">
+                <div className="flex-1">
+                  <h3 className="font-bold text-lg">{item.name}</h3>
+                  <p className="text-sm text-gray-600">{item.category}</p>
+                  <p className="text-green-600 font-bold">₹{item.price} each</p>
+                  {item.farmerId && (
+                    <p className="text-xs text-gray-500 mt-1">From: {item.farmerId.name}</p>
+                  )}
+                </div>
+                <div className="flex flex-col items-end gap-2">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => updateQuantity(item._id, item.cartQuantity - 1)}
+                      className="w-8 h-8 bg-gray-200 rounded hover:bg-gray-300"
+                    >
+                      −
+                    </button>
+                    <span className="w-12 text-center font-medium">{item.cartQuantity}</span>
+                    <button
+                      onClick={() => updateQuantity(item._id, item.cartQuantity + 1)}
+                      className="w-8 h-8 bg-gray-200 rounded hover:bg-gray-300"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <p className="font-bold text-lg">₹{(item.price * item.cartQuantity).toFixed(2)}</p>
                   <button
-                    onClick={() => updateQuantity(item._id, item.cartQuantity - 1)}
-                    className="w-8 h-8 bg-gray-200 rounded hover:bg-gray-300"
+                    onClick={() => removeFromCart(item._id)}
+                    className="text-sm text-red-600 hover:text-red-700"
                   >
-                    −
-                  </button>
-                  <span className="w-12 text-center font-medium">{item.cartQuantity}</span>
-                  <button
-                    onClick={() => updateQuantity(item._id, item.cartQuantity + 1)}
-                    className="w-8 h-8 bg-gray-200 rounded hover:bg-gray-300"
-                  >
-                    +
+                    Remove
                   </button>
                 </div>
-                <p className="font-bold text-lg">₹{(item.price * item.cartQuantity).toFixed(2)}</p>
-                <button
-                  onClick={() => removeFromCart(item._id)}
-                  className="text-sm text-red-600 hover:text-red-700"
-                >
-                  Remove
-                </button>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         <div className="mt-6 pt-6 border-t">

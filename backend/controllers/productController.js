@@ -1,12 +1,30 @@
 const Product = require('../models/Product');
+const fs = require('fs');
+const { cloudinary, hasCloudinaryConfig } = require('../config/cloudinary');
+
+const uploadProductImage = async (file) => {
+  if (!file) return '';
+
+  if (hasCloudinaryConfig()) {
+    const uploaded = await cloudinary.uploader.upload(file.path, {
+      folder: 'freshmandi/products',
+      resource_type: 'image'
+    });
+
+    // Cleanup local temp file after successful cloud upload.
+    fs.promises.unlink(file.path).catch(() => {});
+    return uploaded.secure_url;
+  }
+
+  return `/uploads/${file.filename}`;
+};
 
 exports.addProduct = async (req, res) => {
   try {
     const data = req.body || {};
     // If file upload used, multer will expose req.file
     if (req.file) {
-      // Store accessible URL to uploaded file
-      data.imageURL = `/uploads/${req.file.filename}`;
+      data.imageURL = await uploadProductImage(req.file);
     }
     data.farmerId = req.user._id;
     // Ensure numeric fields are proper types

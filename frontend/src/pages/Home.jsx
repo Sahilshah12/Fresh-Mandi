@@ -141,7 +141,7 @@ export default function Home() {
                   India's First City-Based Farmer–Consumer Marketplace
                 </p>
                 <p className="text-lg md:text-xl text-green-100 mb-10 max-w-2xl mx-auto">
-                  Connecting local farmers with consumers for fresh, quality produce. No middlemen, fair prices, happy farmers!
+                  Connecting local farmers with consumers for fresh, quality products. No middlemen, fair prices, happy farmers!
                 </p>
                 
                 {/* CTA Buttons for Non-logged-in Users */}
@@ -192,7 +192,7 @@ export default function Home() {
       <div className="max-w-6xl mx-auto px-4 py-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Why Choose FreshMandi?</h2>
-          <p className="text-xl text-gray-600">Everything you need for fresh farm-to-table produce</p>
+          <p className="text-xl text-gray-600">Everything you need for fresh farm-to-table products</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

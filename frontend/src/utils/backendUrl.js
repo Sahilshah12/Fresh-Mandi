@@ -4,6 +4,12 @@ export const backendOrigin = apiBase.replace(/\/api\/?$/, '')
 
 export const getBackendUrl = (path = '') => {
   if (!path) return backendOrigin
-  if (path.startsWith('http://') || path.startsWith('https://')) return path
-  return `${backendOrigin}${path.startsWith('/') ? path : `/${path}`}`
+  const normalizedPath = String(path).trim().replace(/\\+/g, '/')
+  if (normalizedPath.startsWith('http://') || normalizedPath.startsWith('https://')) return normalizedPath
+  return `${backendOrigin}${normalizedPath.startsWith('/') ? normalizedPath : `/${normalizedPath}`}`
+}
+
+export const getProductImageUrl = (product = {}) => {
+  const rawPath = product.imageURL || product.imageUrl || product.image || ''
+  return rawPath ? getBackendUrl(rawPath) : ''
 }

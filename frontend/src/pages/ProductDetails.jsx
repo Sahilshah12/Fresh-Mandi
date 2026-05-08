@@ -16,7 +16,7 @@ import { QRCodeSVG } from 'qrcode.react'
 import StarRating from '../components/StarRating'
 import ReviewForm from '../components/ReviewForm'
 import ReviewList from '../components/ReviewList'
-import { getBackendUrl } from '../utils/backendUrl'
+import { getProductImageUrl } from '../utils/backendUrl'
 
 export default function ProductDetails() {
   const { id } = useParams()
@@ -214,9 +214,9 @@ export default function ProductDetails() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
           {/* Left Column - Image */}
           <div>
-            {product.imageURL ? (
+            {getProductImageUrl(product) ? (
               <img 
-                src={getBackendUrl(product.imageURL)}
+                src={getProductImageUrl(product)}
                 alt={product.name}
                 className="w-full h-96 object-cover rounded-lg"
               />

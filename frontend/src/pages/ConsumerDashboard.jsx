@@ -4,7 +4,7 @@ import API from '../services/api'
 import toast from 'react-hot-toast'
 import { useCart } from '../context/CartContext'
 import StarRating from '../components/StarRating'
-import { getBackendUrl } from '../utils/backendUrl'
+import { getProductImageUrl } from '../utils/backendUrl'
 
 export default function ConsumerDashboard(){
   const [products, setProducts] = useState([])
@@ -178,7 +178,7 @@ export default function ConsumerDashboard(){
       
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">🛒 Browse Fresh Produce</h1>
+        <h1 className="text-4xl font-bold text-gray-900 mb-2">🛒 Browse Fresh Products</h1>
         <p className="text-gray-600">Discover farm-fresh products from local farmers</p>
       </div>
       
@@ -413,9 +413,9 @@ export default function ConsumerDashboard(){
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {products.map(p => (
             <div key={p._id} className="border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-shadow bg-white">
-              {p.imageURL ? (
+              {getProductImageUrl(p) ? (
                 <img 
-                  src={getBackendUrl(p.imageURL)} 
+                  src={getProductImageUrl(p)} 
                   alt={p.name} 
                   className="w-full h-48 object-cover"
                 />
